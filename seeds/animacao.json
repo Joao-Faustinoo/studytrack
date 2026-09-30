@@ -1,0 +1,167 @@
+{
+  "subject": {
+    "id": "animacao",
+    "name": "Animação 2D",
+    "color": "#7b4fa8",
+    "weekly_minutes": 90,
+    "sort_order": 3
+  },
+  "_comentario": "Trilha do ZERO, em Adobe Animate. Regra estrutural: os exercicios ate o walk cycle sao FRAME A FRAME, sem tween nenhum. O Animate deixa voce 'animar' uma bola pulando com Motion Tween em trinta segundos - quem faz isso aprende Animate, nao animacao. Por isso os nos de FERRAMENTA so destravam depois do walk cycle.",
+
+  "nodes": [
+    { "id": "anim.des.gesto", "kind": "skill", "state": "todo", "title": "Desenho de gesto e linha de ação",
+      "maintenance_sessions": 2, "est_minutes": 20, "prereqs": [],
+      "criterion": "Capturo a ação de uma pose em 30 segundos com uma linha de ação clara, sem detalhar.",
+      "notes": "Aquecimento de quase toda sessão. Animação ruim quase sempre é desenho de gesto ruim." },
+
+    { "id": "anim.des.formas", "kind": "skill", "state": "todo", "title": "Construção com formas simples",
+      "maintenance_sessions": 3, "est_minutes": 20, "prereqs": ["anim.des.gesto"],
+      "criterion": "Construo personagem a partir de formas básicas e o mantenho reconhecível em ângulos diferentes.", "notes": "" },
+
+    { "id": "anim.des.volume", "kind": "skill", "state": "todo", "title": "Volume e rotação no espaço",
+      "maintenance_sessions": 3, "est_minutes": 25, "prereqs": ["anim.des.formas"],
+      "criterion": "Giro uma forma no espaço mantendo o volume coerente entre desenhos.",
+      "notes": "É isto que impede o personagem de 'derreter' entre um frame e outro." },
+
+    { "id": "anim.des.perspectiva", "kind": "theory", "state": "todo", "title": "Perspectiva básica",
+      "srs_interval_days": 7, "est_minutes": 25, "prereqs": ["anim.des.formas"],
+      "criterion": "Situo objetos num espaço com um e dois pontos de fuga sem que a cena pareça torta.", "notes": "" },
+
+    { "id": "anim.des.linha", "kind": "skill", "state": "todo", "title": "Controle de linha e clean-up",
+      "maintenance_sessions": 4, "est_minutes": 20, "prereqs": ["anim.des.volume"],
+      "criterion": "Linha limpa e de espessura controlada na mesa digitalizadora.", "notes": "" },
+
+    { "id": "anim.pri.timing-spacing", "kind": "theory", "state": "todo", "title": "Princípio — timing e spacing",
+      "srs_interval_days": 3, "est_minutes": 25, "prereqs": [],
+      "criterion": "Explico a diferença entre timing e spacing e mudo o peso de um movimento alterando só o spacing.",
+      "notes": "PRIMEIRO princípio de propósito: é o único que não dá para fingir, e os outros onze dependem dele." },
+
+    { "id": "anim.pri.squash-stretch", "kind": "theory", "state": "todo", "title": "Princípio — squash and stretch",
+      "srs_interval_days": 4, "est_minutes": 20, "prereqs": ["anim.pri.timing-spacing"],
+      "criterion": "Deformo preservando o volume aparente, sem o objeto parecer que mudou de massa.", "notes": "" },
+
+    { "id": "anim.pri.antecipacao", "kind": "theory", "state": "todo", "title": "Princípio — antecipação",
+      "srs_interval_days": 4, "est_minutes": 20, "prereqs": ["anim.pri.timing-spacing"],
+      "criterion": "Toda ação forte tem preparação legível antes dela.", "notes": "" },
+
+    { "id": "anim.pri.arcos", "kind": "theory", "state": "todo", "title": "Princípio — arcos",
+      "srs_interval_days": 4, "est_minutes": 20, "prereqs": ["anim.pri.timing-spacing"],
+      "criterion": "Rastreio a trajetória e ela descreve arco, não linha reta.", "notes": "" },
+
+    { "id": "anim.pri.slow-in-out", "kind": "theory", "state": "todo", "title": "Princípio — slow in e slow out",
+      "srs_interval_days": 4, "est_minutes": 20, "prereqs": ["anim.pri.timing-spacing"],
+      "criterion": "Distribuo inbetweens concentrando desenhos nos extremos.", "notes": "" },
+
+    { "id": "anim.pri.follow-through", "kind": "theory", "state": "todo", "title": "Princípio — follow through e overlapping",
+      "srs_interval_days": 5, "est_minutes": 25, "prereqs": ["anim.pri.arcos", "anim.pri.slow-in-out"],
+      "criterion": "Partes diferentes do corpo param em tempos diferentes, com atraso coerente.", "notes": "" },
+
+    { "id": "anim.pri.acao-secundaria", "kind": "theory", "state": "todo", "title": "Princípio — ação secundária",
+      "srs_interval_days": 5, "est_minutes": 20, "prereqs": ["anim.pri.follow-through"],
+      "criterion": "Acrescento ação de apoio que reforça a principal sem competir com ela.", "notes": "" },
+
+    { "id": "anim.pri.exagero", "kind": "theory", "state": "todo", "title": "Princípio — exagero",
+      "srs_interval_days": 5, "est_minutes": 20, "prereqs": ["anim.pri.squash-stretch", "anim.pri.antecipacao"],
+      "criterion": "Empurro a pose além do natural mantendo a leitura crível.", "notes": "" },
+
+    { "id": "anim.pri.solid-drawing", "kind": "theory", "state": "todo", "title": "Princípio — solid drawing",
+      "srs_interval_days": 6, "est_minutes": 20, "prereqs": ["anim.des.volume"],
+      "criterion": "Peso e volume consistentes ao longo de toda a sequência.", "notes": "" },
+
+    { "id": "anim.pri.encenacao", "kind": "theory", "state": "todo", "title": "Princípio — encenação (staging)",
+      "srs_interval_days": 6, "est_minutes": 20, "prereqs": ["anim.pri.arcos"],
+      "criterion": "A ideia da cena se lê em silhueta.", "notes": "Teste da silhueta: pinte tudo de preto; se não se entende, a encenação falhou." },
+
+    { "id": "anim.pri.straight-pose", "kind": "theory", "state": "todo", "title": "Princípio — straight ahead vs. pose to pose",
+      "srs_interval_days": 6, "est_minutes": 20, "prereqs": ["anim.pri.slow-in-out"],
+      "criterion": "Escolho o método conforme a cena e sei o custo de cada um.", "notes": "" },
+
+    { "id": "anim.pri.appeal", "kind": "theory", "state": "todo", "title": "Princípio — appeal",
+      "srs_interval_days": 8, "est_minutes": 20, "prereqs": ["anim.pri.solid-drawing", "anim.pri.encenacao"],
+      "criterion": "Design legível e interessante, com contraste claro de formas.",
+      "notes": "Por último de propósito: é o mais subjetivo e o que menos se aprende isolado." },
+
+    { "id": "anim.ex.bola", "kind": "project", "state": "todo", "title": "Exercício — bola pulando",
+      "est_minutes": 60, "prereqs": ["anim.pri.timing-spacing", "anim.pri.squash-stretch"],
+      "criterion": "Bola com peso convincente, FRAME A FRAME, sem nenhum tween. GIF anexado ao nó.",
+      "notes": "Se você usar Motion Tween aqui, o exercício não conta. É literalmente o ponto do exercício." },
+
+    { "id": "anim.ex.bola-rabo", "kind": "project", "state": "todo", "title": "Exercício — bola com rabo",
+      "est_minutes": 60, "prereqs": ["anim.ex.bola", "anim.pri.follow-through"],
+      "criterion": "Rabo com atraso e overlap coerentes, sem tween.", "notes": "" },
+
+    { "id": "anim.ex.pendulo", "kind": "project", "state": "todo", "title": "Exercício — pêndulo",
+      "est_minutes": 45, "prereqs": ["anim.ex.bola", "anim.pri.arcos", "anim.pri.slow-in-out"],
+      "criterion": "Arco limpo e desaceleração correta nos extremos.", "notes": "" },
+
+    { "id": "anim.ex.saco-farinha", "kind": "project", "state": "todo", "title": "Exercício — saco de farinha",
+      "est_minutes": 90, "prereqs": ["anim.ex.bola-rabo", "anim.pri.exagero", "anim.pri.solid-drawing"],
+      "criterion": "Personagem sem rosto transmitindo intenção só por peso e pose.",
+      "notes": "Primeiro exercício de atuação de verdade." },
+
+    { "id": "anim.ex.virada-cabeca", "kind": "project", "state": "todo", "title": "Exercício — virada de cabeça",
+      "est_minutes": 60, "prereqs": ["anim.des.volume", "anim.ex.pendulo"],
+      "criterion": "Volume do crânio preservado durante a rotação, com antecipação.", "notes": "" },
+
+    { "id": "anim.ex.piscada", "kind": "project", "state": "todo", "title": "Exercício — piscada",
+      "est_minutes": 30, "prereqs": ["anim.ex.virada-cabeca"],
+      "criterion": "Piscada com timing crível — fechar rápido, abrir mais devagar.", "notes": "" },
+
+    { "id": "anim.ex.walk-cycle", "kind": "project", "state": "todo", "title": "Exercício — walk cycle",
+      "est_minutes": 120, "prereqs": ["anim.ex.saco-farinha", "anim.ex.virada-cabeca", "anim.pri.acao-secundaria"],
+      "criterion": "Ciclo de caminhada em loop limpo, com as poses-chave corretas e sem deslizar no chão.",
+      "notes": "MARCO DA TRILHA. A partir daqui os recursos do Animate são liberados." },
+
+    { "id": "anim.fer.timeline", "kind": "skill", "state": "todo", "title": "Animate — timeline e keyframes",
+      "maintenance_sessions": 6, "est_minutes": 20, "prereqs": ["anim.ex.walk-cycle"],
+      "criterion": "Diferença entre keyframe e keyframe vazio, e navegação fluida na timeline.", "notes": "" },
+
+    { "id": "anim.fer.onion-skin", "kind": "skill", "state": "todo", "title": "Animate — onion skin",
+      "maintenance_sessions": 6, "est_minutes": 15, "prereqs": ["anim.fer.timeline"],
+      "criterion": "Uso onion skin para controlar spacing em vez de adivinhar.",
+      "notes": "Na prática você vai querer isso desde a bola pulando — e tudo bem usar antes; o que não se libera antes do walk cycle são os TWEENS." },
+
+    { "id": "anim.fer.fps", "kind": "theory", "state": "todo", "title": "Animate — ones vs. twos a 24 fps",
+      "srs_interval_days": 7, "est_minutes": 15, "prereqs": ["anim.fer.timeline"],
+      "criterion": "Escolho entre animar em ones ou twos por critério de movimento, não por preguiça.", "notes": "" },
+
+    { "id": "anim.fer.simbolos", "kind": "skill", "state": "todo", "title": "Animate — biblioteca e símbolos",
+      "maintenance_sessions": 8, "est_minutes": 25, "prereqs": ["anim.fer.timeline"],
+      "criterion": "Uso graphic, movie clip e button sabendo a diferença de comportamento na timeline.", "notes": "" },
+
+    { "id": "anim.fer.layer-parenting", "kind": "skill", "state": "todo", "title": "Animate — Layer Parenting",
+      "maintenance_sessions": 8, "est_minutes": 25, "prereqs": ["anim.fer.simbolos"],
+      "criterion": "Hierarquia de camadas montada para animar membros sem redesenhar tudo.", "notes": "" },
+
+    { "id": "anim.fer.asset-warp", "kind": "skill", "state": "todo", "title": "Animate — Asset Warp e rigging",
+      "maintenance_sessions": 10, "est_minutes": 30, "prereqs": ["anim.fer.layer-parenting"],
+      "criterion": "Rig simples com Asset Warp para cut-out, sabendo quando ele substitui frame a frame e quando não.",
+      "notes": "Atalho poderoso — e é exatamente por isso que só aparece depois de você saber animar sem ele." },
+
+    { "id": "anim.fer.camera", "kind": "skill", "state": "todo", "title": "Animate — camada de câmera",
+      "maintenance_sessions": 10, "est_minutes": 20, "prereqs": ["anim.fer.simbolos", "anim.pri.encenacao"],
+      "criterion": "Movimento de câmera que serve a encenação em vez de disfarçar animação fraca.", "notes": "" },
+
+    { "id": "anim.fer.export", "kind": "skill", "state": "todo", "title": "Animate — exportação",
+      "maintenance_sessions": 12, "est_minutes": 20, "prereqs": ["anim.fer.timeline"],
+      "criterion": "Exporto vídeo, GIF e sprite sheet com configuração adequada para cada destino.",
+      "notes": "Necessário desde cedo: todo exercício fecha com GIF anexado ao nó." },
+
+    { "id": "anim.ex.run-cycle", "kind": "project", "state": "todo", "title": "Exercício — run cycle",
+      "est_minutes": 120, "prereqs": ["anim.ex.walk-cycle"],
+      "criterion": "Corrida em loop com momento de suspensão e peso convincentes.", "notes": "" },
+
+    { "id": "anim.ex.salto", "kind": "project", "state": "todo", "title": "Exercício — salto",
+      "est_minutes": 120, "prereqs": ["anim.ex.run-cycle", "anim.pri.antecipacao"],
+      "criterion": "Antecipação, impulso, suspensão e aterrissagem com recuperação.", "notes": "" },
+
+    { "id": "anim.ex.lip-sync", "kind": "project", "state": "todo", "title": "Exercício — lip sync",
+      "est_minutes": 120, "prereqs": ["anim.ex.piscada", "anim.fer.fps"],
+      "criterion": "Fonemas sincronizados a um áudio curto, com a mandíbula acompanhando.", "notes": "" },
+
+    { "id": "anim.ex.atuacao", "kind": "project", "state": "todo", "title": "Exercício — cena de atuação",
+      "est_minutes": 240, "prereqs": ["anim.ex.lip-sync", "anim.ex.salto", "anim.pri.appeal", "anim.fer.camera"],
+      "criterion": "Cena curta com intenção clara do personagem — a primeira peça de portfólio de verdade.",
+      "notes": "Fim da trilha inicial. Daqui em diante, o caminho é repertório próprio." }
+  ]
+}

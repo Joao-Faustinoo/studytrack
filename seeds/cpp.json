@@ -1,0 +1,171 @@
+{
+  "subject": {
+    "id": "cpp",
+    "name": "C++",
+    "color": "#00599c",
+    "weekly_minutes": 150,
+    "sort_order": 2
+  },
+  "_comentario": "Trilha para quem aprendeu C++ na faculdade e enferrujou. A fase 'base' nao e revisao de sintaxe: e DESAPRENDER habitos de C++98 (new/delete, ponteiros crus, heranca para tudo). Curta de proposito - nao se reaprende C++ relendo livro, se reaprende escrevendo o motor. Restricao do ambiente: MSVC 19.29 (VS2019), sem <format> e sem <expected>.",
+
+  "nodes": [
+    { "id": "cpp.base.valor-raii", "kind": "theory", "state": "learning", "title": "Semântica de valor e RAII",
+      "srs_interval_days": 3, "est_minutes": 30, "prereqs": [],
+      "criterion": "Explico por que `new` e `delete` praticamente sumiram do C++ moderno e escrevo uma classe que libera seu recurso sozinha.",
+      "notes": "O nó que desfaz o maior hábito de C++98. Tudo depende dele." },
+
+    { "id": "cpp.base.init", "kind": "theory", "state": "todo", "title": "Inicialização e const-correctness",
+      "srs_interval_days": 3, "est_minutes": 25, "prereqs": ["cpp.base.valor-raii"],
+      "criterion": "Sei quando usar chaves e quando não usar, e marco const por padrão em vez de por exceção.",
+      "notes": "Inclui a armadilha clássica de initializer_list em vector<int>." },
+
+    { "id": "cpp.base.referencias", "kind": "theory", "state": "todo", "title": "Referências, ponteiros e donos",
+      "srs_interval_days": 4, "est_minutes": 25, "prereqs": ["cpp.base.valor-raii"],
+      "criterion": "Escolho entre valor, referência, referência const e ponteiro a partir de quem é dono do objeto, não por hábito.", "notes": "" },
+
+    { "id": "cpp.base.smart-pointers", "kind": "theory", "state": "todo", "title": "unique_ptr e shared_ptr",
+      "srs_interval_days": 4, "est_minutes": 25, "prereqs": ["cpp.base.referencias"],
+      "criterion": "unique_ptr é meu padrão; uso shared_ptr só quando a posse é genuinamente compartilhada e sei o custo.", "notes": "" },
+
+    { "id": "cpp.base.stl-containers", "kind": "theory", "state": "todo", "title": "Containers da STL e complexidade",
+      "srs_interval_days": 5, "est_minutes": 30, "prereqs": ["cpp.base.valor-raii"],
+      "criterion": "Escolho container pela complexidade e pelo padrão de acesso, e sei por que vector quase sempre ganha na prática.", "notes": "" },
+
+    { "id": "cpp.base.string-view", "kind": "theory", "state": "todo", "title": "string, string_view e span",
+      "srs_interval_days": 5, "est_minutes": 20, "prereqs": ["cpp.base.referencias"],
+      "criterion": "Uso string_view sem criar dangling, e sei exatamente quando ele é perigoso.", "notes": "" },
+
+    { "id": "cpp.tool.cmake", "kind": "skill", "state": "learning", "title": "CMake moderno",
+      "maintenance_sessions": 6, "est_minutes": 30, "prereqs": [],
+      "criterion": "Escrevo CMakeLists com targets e propriedades por target, sem variáveis globais nem comandos de diretório.",
+      "notes": "Aprendido construindo o próprio studytrack. Cuidado: quase todo tutorial de CMake na internet ensina o estilo antigo." },
+
+    { "id": "cpp.tool.debugger", "kind": "skill", "state": "todo", "title": "Debugger no VS Code",
+      "maintenance_sessions": 6, "est_minutes": 25, "prereqs": ["cpp.tool.cmake"],
+      "criterion": "Breakpoint condicional, watch e inspeção de stack — depurar sem espalhar printf.", "notes": "" },
+
+    { "id": "cpp.tool.testes", "kind": "skill", "state": "todo", "title": "Testes com Catch2",
+      "maintenance_sessions": 4, "est_minutes": 30, "prereqs": ["cpp.tool.cmake"],
+      "criterion": "Escrevo teste antes da implementação nos módulos graph e scheduler, e a suíte roda em um comando.",
+      "notes": "graph/ e scheduler/ são funções puras justamente para serem testáveis sem mock." },
+
+    { "id": "cpp.tool.sanitizers", "kind": "skill", "state": "todo", "title": "AddressSanitizer",
+      "maintenance_sessions": 8, "est_minutes": 25, "prereqs": ["cpp.tool.cmake"],
+      "criterion": "Build com /fsanitize=address configurado e rodando na suíte de testes.",
+      "notes": "MSVC tem ASan mas não tem UBSan. Vale saber a diferença." },
+
+    { "id": "cpp.tool.format-tidy", "kind": "skill", "state": "todo", "title": "clang-format e clang-tidy",
+      "maintenance_sessions": 10, "est_minutes": 20, "prereqs": ["cpp.tool.cmake"],
+      "criterion": "Formatação automática e linter apontando problemas reais antes da compilação.", "notes": "" },
+
+    { "id": "cpp.mod.move", "kind": "theory", "state": "todo", "title": "Move semantics e regra dos 0/5",
+      "srs_interval_days": 4, "est_minutes": 35, "prereqs": ["cpp.base.smart-pointers"],
+      "criterion": "Explico o que sobra num objeto movido, e escrevo classes que seguem a regra do zero por padrão.",
+      "notes": "O conceito que mais separa C++98 de C++ moderno." },
+
+    { "id": "cpp.mod.algorithms", "kind": "skill", "state": "todo", "title": "Algoritmos da STL",
+      "maintenance_sessions": 5, "est_minutes": 25, "prereqs": ["cpp.base.stl-containers"],
+      "criterion": "Escrevo laços crus só quando nenhum algoritmo serve — e isso é raro.", "notes": "" },
+
+    { "id": "cpp.mod.lambdas", "kind": "theory", "state": "todo", "title": "Lambdas e captura",
+      "srs_interval_days": 5, "est_minutes": 20, "prereqs": ["cpp.mod.algorithms"],
+      "criterion": "Capturo por valor ou referência sabendo o tempo de vida, sem usar [&] por reflexo.", "notes": "" },
+
+    { "id": "cpp.mod.ranges", "kind": "theory", "state": "todo", "title": "Ranges e views (C++20)",
+      "srs_interval_days": 6, "est_minutes": 35, "prereqs": ["cpp.mod.algorithms", "cpp.mod.lambdas"],
+      "criterion": "Componho views sem materializar containers intermediários e sei quando a view vira armadilha de tempo de vida.",
+      "notes": "Já testado e funcionando no MSVC 19.29 desta máquina." },
+
+    { "id": "cpp.mod.optional-variant", "kind": "theory", "state": "todo", "title": "optional e variant",
+      "srs_interval_days": 5, "est_minutes": 25, "prereqs": ["cpp.base.init"],
+      "criterion": "Modelo ausência com optional e alternativas com variant, em vez de sentinelas e flags.", "notes": "" },
+
+    { "id": "cpp.mod.chrono", "kind": "theory", "state": "todo", "title": "chrono e datas",
+      "srs_interval_days": 6, "est_minutes": 25, "prereqs": ["cpp.base.init"],
+      "criterion": "Uso tipos fortes de duração em vez de int de minutos espalhado pelo código.",
+      "notes": "Direto aplicável: o scheduler lida com dias, sessões e prazos o tempo todo." },
+
+    { "id": "cpp.mod.erros", "kind": "theory", "state": "todo", "title": "Tratamento de erros",
+      "srs_interval_days": 6, "est_minutes": 30, "prereqs": ["cpp.mod.optional-variant"],
+      "criterion": "Decido entre exceção e valor de retorno por critério, e sei o que significa noexcept.", "notes": "" },
+
+    { "id": "cpp.tpl.funcao-classe", "kind": "theory", "state": "todo", "title": "Templates de função e de classe",
+      "srs_interval_days": 6, "est_minutes": 35, "prereqs": ["cpp.mod.move"],
+      "criterion": "Escrevo template próprio e leio o erro do compilador sem pânico.", "notes": "" },
+
+    { "id": "cpp.tpl.concepts", "kind": "theory", "state": "todo", "title": "Concepts (C++20)",
+      "srs_interval_days": 7, "est_minutes": 30, "prereqs": ["cpp.tpl.funcao-classe"],
+      "criterion": "Restrinjo template com concept e obtenho mensagem de erro legível em vez de parede de texto.", "notes": "" },
+
+    { "id": "cpp.tpl.traits", "kind": "theory", "state": "todo", "title": "Type traits e if constexpr",
+      "srs_interval_days": 7, "est_minutes": 30, "prereqs": ["cpp.tpl.funcao-classe"],
+      "criterion": "Uso if constexpr no lugar de SFINAE e entendo o SFINAE que vou encontrar em código antigo.", "notes": "" },
+
+    { "id": "cpp.arq.headers", "kind": "theory", "state": "todo", "title": "Headers, unidades de tradução e tempo de compilação",
+      "srs_interval_days": 7, "est_minutes": 30, "prereqs": ["cpp.base.stl-containers"],
+      "criterion": "Uso forward declaration e sei por que incluir demais no header custa caro.", "notes": "" },
+
+    { "id": "cpp.arq.polimorfismo", "kind": "theory", "state": "todo", "title": "Polimorfismo dinâmico vs. estático",
+      "srs_interval_days": 7, "est_minutes": 30, "prereqs": ["cpp.tpl.concepts", "cpp.arq.headers"],
+      "criterion": "Escolho entre interface virtual e template por critério, não por hábito de faculdade.",
+      "notes": "Aqui mora o segundo maior hábito ruim herdado de curso: herança usada para tudo." },
+
+    { "id": "cpp.arq.pimpl", "kind": "theory", "state": "todo", "title": "PIMPL e fronteiras de módulo",
+      "srs_interval_days": 8, "est_minutes": 25, "prereqs": ["cpp.arq.headers"],
+      "criterion": "Aplico PIMPL onde há ganho real de compilação ou de ABI, e não por estética.", "notes": "" },
+
+    { "id": "cpp.arq.testabilidade", "kind": "theory", "state": "todo", "title": "Desacoplamento e testabilidade",
+      "srs_interval_days": 8, "est_minutes": 25, "prereqs": ["cpp.arq.polimorfismo", "cpp.tool.testes"],
+      "criterion": "Mantenho lógica pura separada de I/O — exatamente como graph/ e scheduler/ estão separados de store/.", "notes": "" },
+
+    { "id": "cpp.adv.concorrencia", "kind": "theory", "state": "todo", "title": "thread, mutex e data races",
+      "srs_interval_days": 8, "est_minutes": 40, "prereqs": ["cpp.mod.move", "cpp.arq.testabilidade"],
+      "criterion": "Identifico data race e protejo estado compartilhado sem travar tudo num mutex só.", "notes": "" },
+
+    { "id": "cpp.adv.atomics", "kind": "theory", "state": "todo", "title": "Atomics e modelo de memória",
+      "srs_interval_days": 10, "est_minutes": 40, "prereqs": ["cpp.adv.concorrencia"],
+      "criterion": "Explico por que memory_order relaxado é perigoso e quando seq_cst é o certo.",
+      "notes": "Nó difícil e legitimamente opcional. Não bloqueia nada." },
+
+    { "id": "cpp.adv.performance", "kind": "theory", "state": "todo", "title": "Cache, alocação e custo real",
+      "srs_interval_days": 9, "est_minutes": 35, "prereqs": ["cpp.base.stl-containers", "cpp.mod.move"],
+      "criterion": "Explico por que vector bate list mesmo onde a notação O diz o contrário.", "notes": "" },
+
+    { "id": "cpp.adv.profiling", "kind": "skill", "state": "todo", "title": "Medição e benchmark",
+      "maintenance_sessions": 10, "est_minutes": 30, "prereqs": ["cpp.adv.performance"],
+      "criterion": "Meço antes de otimizar, e a medição é reproduzível.", "notes": "" },
+
+    { "id": "cpp.proj.motor-v1", "kind": "project", "state": "learning", "title": "Projeto — motor do studytrack (v1)",
+      "est_minutes": 90, "prereqs": ["cpp.tool.cmake", "cpp.base.valor-raii"],
+      "criterion": "Binário compila, serve a API, monta a fila do dia e registra sessão de ponta a ponta.",
+      "notes": "O tracker rastreando a própria construção." },
+
+    { "id": "cpp.proj.sqlite-raii", "kind": "project", "state": "todo", "title": "Projeto — wrapper RAII sobre a API C do SQLite",
+      "est_minutes": 60, "prereqs": ["cpp.proj.motor-v1", "cpp.base.smart-pointers", "cpp.mod.move"],
+      "criterion": "Nenhum sqlite3_finalize manual sobrou no código; statement e conexão se fecham sozinhos.",
+      "notes": "Exercício perfeito de RAII: a API do SQLite é C puro e cheia de recursos para vazar." },
+
+    { "id": "cpp.proj.result", "kind": "project", "state": "todo", "title": "Projeto — implementar um Result<T,E> (substituto de std::expected)",
+      "est_minutes": 60, "prereqs": ["cpp.mod.optional-variant", "cpp.mod.erros", "cpp.tpl.funcao-classe"],
+      "criterion": "Result próprio com testes, usado nas fronteiras de store/ e api/ no lugar de exceções.",
+      "notes": "MSVC 19.29 não tem std::expected — o que aqui é sorte: escrever o seu ensina muito mais do que usar o da biblioteca." },
+
+    { "id": "cpp.proj.kahn", "kind": "project", "state": "todo", "title": "Projeto — trocar a ordenação topológica ingênua por Kahn",
+      "est_minutes": 60, "prereqs": ["cpp.proj.motor-v1", "cpp.tool.testes", "cpp.mod.algorithms"],
+      "criterion": "Algoritmo de Kahn com detecção de ciclo, testes passando e benchmark antes/depois.",
+      "notes": "A versão que eu escrevi no v1 é deliberadamente ingênua — este nó é você substituindo o meu código." },
+
+    { "id": "cpp.proj.scheduler-ranges", "kind": "project", "state": "todo", "title": "Projeto — reescrever o scheduler com ranges",
+      "est_minutes": 60, "prereqs": ["cpp.proj.motor-v1", "cpp.mod.ranges", "cpp.tool.testes"],
+      "criterion": "Pipeline de pontuação e filtragem expresso em views, com a suíte de testes intacta.",
+      "notes": "Igual ao anterior: o v1 sai com laços simples de propósito, para você ter o que refatorar." },
+
+    { "id": "cpp.proj.cli", "kind": "project", "state": "todo", "title": "Projeto — CLI com subcomandos",
+      "est_minutes": 45, "prereqs": ["cpp.proj.motor-v1", "cpp.base.string-view"],
+      "criterion": "studytrack today / log / status funcionando com parsing de argumentos decente.", "notes": "" },
+
+    { "id": "cpp.proj.bench", "kind": "project", "state": "todo", "title": "Projeto — benchmark do scheduler",
+      "est_minutes": 45, "prereqs": ["cpp.adv.profiling", "cpp.proj.scheduler-ranges"],
+      "criterion": "Medição reproduzível com grafo sintético grande, comparando as versões.", "notes": "" }
+  ]
+}

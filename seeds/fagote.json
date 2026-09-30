@@ -1,0 +1,180 @@
+{
+  "subject": {
+    "id": "fagote",
+    "name": "Fagote",
+    "color": "#b5651d",
+    "weekly_minutes": 360,
+    "sort_order": 1
+  },
+  "_comentario": "Trilha de fagotista AVANCADO e SEM PROFESSOR. Quase tudo nasce em 'maintenance', nao em 'todo': o objetivo nao e aprender do zero, e manter, ciclar repertorio e preparar audicao. Sem professor, o gravador e o professor - ver no fg.meta.gravacao.",
+
+  "nodes": [
+    { "id": "fg.meta.gravacao", "kind": "skill", "state": "learning", "title": "Rotina de gravação e autoavaliação",
+      "maintenance_sessions": 3, "est_minutes": 15, "prereqs": [],
+      "criterion": "Gravo pelo menos um trecho por sessão e escuto com partitura na mão, anotando afinação, ritmo e som antes de julgar musicalidade.",
+      "notes": "Sem professor, este é o nó mais importante da trilha inteira. O ouvido de quem está tocando mente; o de quem está escutando, não." },
+
+    { "id": "fg.tec.respiracao", "kind": "skill", "state": "maintenance", "title": "Respiração e apoio",
+      "maintenance_sessions": 2, "est_minutes": 10, "prereqs": [],
+      "criterion": "Frase longa em dinâmica constante sem colapso de apoio no fim do ar.", "notes": "" },
+
+    { "id": "fg.tec.som-longas", "kind": "skill", "state": "maintenance", "title": "Som — notas longas e afinação",
+      "maintenance_sessions": 2, "est_minutes": 15, "prereqs": ["fg.tec.respiracao"],
+      "criterion": "Notas longas em toda a extensão, afinador ligado, sem oscilação de altura ao cruzar registros.",
+      "metrics": ["cents"], "notes": "Atenção especial às notas historicamente instáveis do instrumento." },
+
+    { "id": "fg.tec.palheta-ajuste", "kind": "skill", "state": "maintenance", "title": "Ajuste de palheta (raspagem e crow)",
+      "maintenance_sessions": 2, "est_minutes": 20, "prereqs": [],
+      "criterion": "Diagnostico pelo crow o que a palheta precisa e corrijo com raspagem pontual, sem estragar palheta boa.",
+      "notes": "Para fagotista avançado a palheta costuma ser a maior variável do som e a menos rastreada. Ver o log de palhetas (v2)." },
+
+    { "id": "fg.tec.palheta-confeccao", "kind": "project", "state": "todo", "title": "Confecção de palheta do zero",
+      "est_minutes": 60, "prereqs": ["fg.tec.palheta-ajuste"],
+      "criterion": "Ciclo completo — gouge, perfil, forma, amarração, raspagem — produzindo palheta tocável de forma repetível.",
+      "notes": "Sem professor esta é a habilidade mais difícil de autoaprender. Vale procurar um fagotista para uma sessão única de orientação." },
+
+    { "id": "fg.tec.escalas-maiores", "kind": "skill", "state": "maintenance", "title": "Escalas maiores — todas as tonalidades",
+      "maintenance_sessions": 2, "est_minutes": 15, "prereqs": ["fg.tec.som-longas"],
+      "criterion": "12 maiores, extensão máxima confortável, ligado e staccato, semínima = 120, sem hesitação.",
+      "metrics": ["bpm"], "notes": "" },
+
+    { "id": "fg.tec.escalas-menores", "kind": "skill", "state": "maintenance", "title": "Escalas menores (natural, harmônica, melódica)",
+      "maintenance_sessions": 3, "est_minutes": 15, "prereqs": ["fg.tec.escalas-maiores"],
+      "criterion": "As três formas em 12 tonalidades, mesmo andamento das maiores.", "metrics": ["bpm"], "notes": "" },
+
+    { "id": "fg.tec.arpejos", "kind": "skill", "state": "maintenance", "title": "Arpejos — tríades e tétrades",
+      "maintenance_sessions": 3, "est_minutes": 15, "prereqs": ["fg.tec.escalas-maiores"],
+      "criterion": "Maiores, menores, diminutos e de dominante em todas as tonalidades, ligados e destacados.",
+      "metrics": ["bpm"], "notes": "" },
+
+    { "id": "fg.tec.cromatica", "kind": "skill", "state": "maintenance", "title": "Cromática em toda a extensão",
+      "maintenance_sessions": 3, "est_minutes": 10, "prereqs": ["fg.tec.escalas-maiores"],
+      "criterion": "Do grave ao agudo utilizável, uniforme em timbre, sem buraco ao passar pelas chaves de polegar.",
+      "metrics": ["bpm"], "notes": "" },
+
+    { "id": "fg.tec.agudo-polegar", "kind": "skill", "state": "maintenance", "title": "Registro agudo e chaves de polegar",
+      "maintenance_sessions": 2, "est_minutes": 15, "prereqs": ["fg.tec.som-longas", "fg.tec.palheta-ajuste"],
+      "criterion": "Ataque limpo no agudo em pp, sem esmagar a palheta nem forçar embocadura.",
+      "notes": "Pré-requisito real da Sagração e do Bolero." },
+
+    { "id": "fg.tec.flicking", "kind": "skill", "state": "maintenance", "title": "Flicking e meio-buraco",
+      "maintenance_sessions": 3, "est_minutes": 10, "prereqs": ["fg.tec.agudo-polegar"],
+      "criterion": "Ataques e ligaduras na região de quebra sem estalo nem oitava errada, em andamento real.", "notes": "" },
+
+    { "id": "fg.tec.staccato", "kind": "skill", "state": "maintenance", "title": "Staccato",
+      "maintenance_sessions": 2, "est_minutes": 15, "prereqs": ["fg.tec.escalas-maiores"],
+      "criterion": "Staccato uniforme e leve em toda a extensão, semicolcheias a 120+, sem enrijecer a garganta.",
+      "metrics": ["bpm"], "notes": "Fígaro cobra exatamente isso." },
+
+    { "id": "fg.tec.legato-saltos", "kind": "skill", "state": "maintenance", "title": "Legato e saltos largos",
+      "maintenance_sessions": 3, "est_minutes": 10, "prereqs": ["fg.tec.som-longas"],
+      "criterion": "Saltos de oitava e maiores sem glissando nem mudança de cor entre os registros.", "notes": "" },
+
+    { "id": "fg.tec.dinamica", "kind": "skill", "state": "maintenance", "title": "Controle dinâmico (pp ao ff)",
+      "maintenance_sessions": 3, "est_minutes": 10, "prereqs": ["fg.tec.som-longas"],
+      "criterion": "Messa di voce em notas de registros diferentes mantendo a afinação dentro de ±10 cents.",
+      "metrics": ["cents"], "notes": "" },
+
+    { "id": "fg.tec.vibrato", "kind": "skill", "state": "maintenance", "title": "Vibrato",
+      "maintenance_sessions": 4, "est_minutes": 10, "prereqs": ["fg.tec.dinamica"],
+      "criterion": "Velocidade e amplitude controladas conscientemente, e capacidade de desligar por completo.", "notes": "" },
+
+    { "id": "fg.tec.trinados", "kind": "skill", "state": "maintenance", "title": "Trinados e digitações alternativas",
+      "maintenance_sessions": 4, "est_minutes": 10, "prereqs": ["fg.tec.cromatica"],
+      "criterion": "Tabela de trinados memorizada nas regiões usadas no repertório ativo.", "notes": "" },
+
+    { "id": "fg.est.milde-op24", "kind": "skill", "state": "maintenance", "title": "Milde — 25 Estudos em Escalas e Acordes, Op. 24",
+      "maintenance_sessions": 3, "est_minutes": 25, "prereqs": ["fg.tec.escalas-menores", "fg.tec.arpejos"],
+      "criterion": "Estudo em andamento indicado, de memória do gesto técnico, gravado e aprovado na escuta.", "notes": "" },
+
+    { "id": "fg.est.milde-op26", "kind": "skill", "state": "maintenance", "title": "Milde — 50 Estudos de Concerto, Op. 26",
+      "maintenance_sessions": 3, "est_minutes": 30, "prereqs": ["fg.est.milde-op24"],
+      "criterion": "Estudo tocado como música, não como exercício: fraseado e caráter definidos.", "notes": "" },
+
+    { "id": "fg.est.orefici", "kind": "skill", "state": "todo", "title": "Orefici — estudos de bravura",
+      "maintenance_sessions": 4, "est_minutes": 25, "prereqs": ["fg.est.milde-op24", "fg.tec.staccato"],
+      "criterion": "Velocidade e articulação sob controle sem perder qualidade de som.", "notes": "" },
+
+    { "id": "fg.rep.vivaldi-rv484", "kind": "project", "state": "learning", "title": "Vivaldi — Concerto em Mi menor, RV 484",
+      "est_minutes": 45, "prereqs": ["fg.tec.escalas-menores", "fg.tec.staccato", "fg.est.milde-op24"],
+      "deadline": null,
+      "criterion": "Três movimentos em andamento de concerto, de cor nas passagens expostas, gravados sem edição e aprovados na escuta.",
+      "notes": "PEÇA DA AUDIÇÃO DE RETORNO À ESCOLA. Prioridade máxima. Preencher o campo deadline assim que a data for conhecida." },
+
+    { "id": "fg.rep.weber-op75", "kind": "project", "state": "maintenance", "title": "Weber — Concerto em Fá maior, Op. 75",
+      "est_minutes": 40, "prereqs": [],
+      "criterion": "1º movimento recuperado ao nível em que já foi tocado; Adagio e Rondó em leitura avançada.",
+      "notes": "Já tocado — entra em manutenção. Peça pronta que fica seis meses parada deixa de estar pronta, e é justamente disso que o app te avisa." },
+
+    { "id": "fg.rep.mozart-k191", "kind": "project", "state": "todo", "title": "Mozart — Concerto em Si bemol maior, K. 191",
+      "est_minutes": 45, "prereqs": ["fg.rep.vivaldi-rv484"],
+      "criterion": "1º movimento com cadência escolhida e articulação clássica consistente.",
+      "notes": "Próximo passo natural do repertório solo, e presença quase certa em qualquer banca." },
+
+    { "id": "fg.rep.saint-saens", "kind": "project", "state": "todo", "title": "Saint-Saëns — Sonata Op. 168",
+      "est_minutes": 40, "prereqs": ["fg.rep.mozart-k191"], "criterion": "Movimentos em nível de apresentação.", "notes": "" },
+
+    { "id": "fg.rep.tansman", "kind": "project", "state": "todo", "title": "Tansman — Sonatine",
+      "est_minutes": 40, "prereqs": ["fg.rep.mozart-k191"], "criterion": "Linguagem do século XX com ritmo preciso.", "notes": "" },
+
+    { "id": "fg.rep.hindemith", "kind": "project", "state": "todo", "title": "Hindemith — Sonata (1938)",
+      "est_minutes": 40, "prereqs": ["fg.rep.saint-saens"], "criterion": "Movimentos em nível de apresentação.", "notes": "" },
+
+    { "id": "fg.exc.figaro", "kind": "skill", "state": "todo", "title": "Excerto — Mozart, Abertura das Bodas de Fígaro",
+      "maintenance_sessions": 5, "est_minutes": 10, "prereqs": ["fg.tec.staccato"],
+      "criterion": "Staccato leve e junto no andamento de abertura, sem borrar as semicolcheias.", "notes": "" },
+
+    { "id": "fg.exc.beethoven4", "kind": "skill", "state": "todo", "title": "Excerto — Beethoven, Sinfonia nº 4",
+      "maintenance_sessions": 5, "est_minutes": 10, "prereqs": ["fg.tec.staccato", "fg.tec.escalas-maiores"],
+      "criterion": "Passagem do último movimento limpa em andamento, e o solo do 2º movimento com fraseado.",
+      "notes": "Excerto de audição por excelência." },
+
+    { "id": "fg.exc.scheherazade", "kind": "skill", "state": "todo", "title": "Excerto — Rimsky-Korsakov, Scheherazade (2º mov)",
+      "maintenance_sessions": 5, "est_minutes": 10, "prereqs": ["fg.tec.dinamica", "fg.tec.vibrato"],
+      "criterion": "Cadência com rubato próprio e som cantabile do início ao fim.", "notes": "" },
+
+    { "id": "fg.exc.bolero", "kind": "skill", "state": "todo", "title": "Excerto — Ravel, Bolero",
+      "maintenance_sessions": 5, "est_minutes": 10, "prereqs": ["fg.tec.agudo-polegar"],
+      "criterion": "Solo no agudo afinado e relaxado, em dinâmica controlada.", "notes": "" },
+
+    { "id": "fg.exc.tchaikovsky6", "kind": "skill", "state": "todo", "title": "Excerto — Tchaikovsky, Sinfonia nº 6 (1º mov)",
+      "maintenance_sessions": 5, "est_minutes": 10, "prereqs": ["fg.tec.dinamica"],
+      "criterion": "Solo em pianississimo real, com ataque seguro e sem tremor.", "notes": "" },
+
+    { "id": "fg.exc.shostakovich9", "kind": "skill", "state": "todo", "title": "Excerto — Shostakovich, Sinfonia nº 9",
+      "maintenance_sessions": 6, "est_minutes": 10, "prereqs": ["fg.tec.dinamica", "fg.tec.legato-saltos"],
+      "criterion": "Cadência sustentada com direção musical clara.", "notes": "" },
+
+    { "id": "fg.exc.sagracao", "kind": "skill", "state": "todo", "title": "Excerto — Stravinsky, A Sagração da Primavera (abertura)",
+      "maintenance_sessions": 6, "est_minutes": 10, "prereqs": ["fg.tec.agudo-polegar", "fg.tec.palheta-ajuste"],
+      "criterion": "Abertura no registro extremo, afinada e com som livre.",
+      "notes": "Depende fortemente da palheta. Anotar qual palheta funcionou." },
+
+    { "id": "fg.teo.clave-do-tenor", "kind": "theory", "state": "maintenance", "title": "Leitura em clave de dó (tenor)",
+      "srs_interval_days": 7, "est_minutes": 10, "prereqs": [],
+      "criterion": "Leitura à primeira vista em clave de dó sem transpor mentalmente a partir da clave de fá.",
+      "notes": "Mantido como leitura, não reaprendido." },
+
+    { "id": "fg.teo.harmonia-funcional", "kind": "theory", "state": "learning", "title": "Harmonia funcional avançada",
+      "srs_interval_days": 3, "est_minutes": 25, "prereqs": [],
+      "criterion": "Analiso cifra e função de um trecho tonal sem consultar tabela, incluindo empréstimo modal e dominantes secundárias.", "notes": "" },
+
+    { "id": "fg.teo.conducao-vozes", "kind": "theory", "state": "todo", "title": "Condução de vozes",
+      "srs_interval_days": 3, "est_minutes": 25, "prereqs": ["fg.teo.harmonia-funcional"],
+      "criterion": "Realizo baixo cifrado a quatro vozes sem paralelas proibidas.", "notes": "" },
+
+    { "id": "fg.teo.analise-formal", "kind": "theory", "state": "todo", "title": "Análise formal",
+      "srs_interval_days": 5, "est_minutes": 30, "prereqs": ["fg.teo.harmonia-funcional"],
+      "criterion": "Mapeio a forma do que estou tocando e uso isso em decisão de fraseado.",
+      "notes": "Aplicar diretamente ao Vivaldi e ao Weber — análise que não muda a interpretação foi tempo perdido." },
+
+    { "id": "fg.teo.transposicao", "kind": "theory", "state": "todo", "title": "Transposição",
+      "srs_interval_days": 7, "est_minutes": 15, "prereqs": ["fg.teo.clave-do-tenor"],
+      "criterion": "Transponho à primeira vista nos intervalos mais comuns em orquestra.", "notes": "" },
+
+    { "id": "fg.teo.percepcao", "kind": "theory", "state": "maintenance", "title": "Percepção — solfejo e ditado",
+      "srs_interval_days": 2, "est_minutes": 15, "prereqs": [],
+      "criterion": "Ditado melódico e rítmico em nível de prova de admissão, e solfejo afinado sem instrumento.",
+      "notes": "Bancas de retorno quase sempre cobram percepção. Não deixar para o fim." }
+  ]
+}

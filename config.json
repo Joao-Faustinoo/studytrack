@@ -1,0 +1,34 @@
+{
+  "_comentario": "Pesos do scheduler. Mexa aqui nas primeiras semanas — pesos no código seriam um erro de design.",
+
+  "queue": {
+    "size": 5,
+    "max_per_subject": 2,
+    "_nota": "max_per_subject é o que impede a fila de virar um bloco só de C++ num dia em que o grafo de C++ está mais 'quente'."
+  },
+
+  "weights": {
+    "deadline_urgency": 4.0,
+    "overdue_srs": 3.0,
+    "maintenance": 2.0,
+    "active_project": 1.5,
+    "newly_unlocked": 1.0
+  },
+
+  "saturation": {
+    "_nota": "A REGRA ANTI-DÍVIDA. Atraso satura: some quantas semanas passarem, um item atrasado nunca vale mais que o cap. Sem isso, voltar depois de um mês parado geraria uma fila vermelha de 40 itens — e aí você fecha o app para sempre.",
+    "overdue_ratio_cap": 2.0,
+    "maintenance_ratio_cap": 2.0
+  },
+
+  "deadline": {
+    "horizon_days": 90,
+    "_nota": "Prazo só começa a empurrar quando entra nesse horizonte; antes disso um projeto com deadline distante não polui a fila."
+  },
+
+  "srs": {
+    "intervals_days": [1, 3, 7, 21, 60],
+    "lapse_penalty": 0.5,
+    "_nota": "Marcar 'struggled' numa sessão multiplica o intervalo por lapse_penalty em vez de zerar — zerar desmotiva sem ganho real."
+  }
+}
