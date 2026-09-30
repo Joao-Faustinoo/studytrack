@@ -78,15 +78,21 @@ endif()
 add_executable(studytrack src/cli/main.cpp)
 target_link_libraries(studytrack PRIVATE st_core st_strict)
 
-# recursos ao lado do binario
-add_custom_command(TARGET studytrack POST_BUILD
+# Recursos ao lado do binario.
+#
+# Alvo proprio com ALL em vez de POST_BUILD: o POST_BUILD so dispara quando o
+# executavel religa, entao mexer apenas no CSS ou num seed deixava a copia
+# desatualizada e o navegador servindo a versao antiga.
+add_custom_target(st_assets ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory
             "${CMAKE_CURRENT_SOURCE_DIR}/web" "$<TARGET_FILE_DIR:studytrack>/web"
     COMMAND ${CMAKE_COMMAND} -E copy_directory
             "${CMAKE_CURRENT_SOURCE_DIR}/seeds" "$<TARGET_FILE_DIR:studytrack>/seeds"
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${CMAKE_CURRENT_SOURCE_DIR}/config.json" "$<TARGET_FILE_DIR:studytrack>/config.json"
+    COMMENT "copiando web/, seeds/ e config.json"
     VERBATIM)
+add_dependencies(st_assets studytrack)
 
 # ---------------------------------------------------------------------------
 # testes

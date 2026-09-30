@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#11131a">
+<title>studytrack</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="topo">
+    <h1>studytrack</h1>
+    <span id="data" class="data"></span>
+  </div>
+  <nav class="abas">
+    <button class="aba ativa" data-aba="hoje">Hoje</button>
+    <button class="aba" data-aba="trilhas">Trilhas</button>
+  </nav>
+</header>
+
+<main>
+  <section id="painel-hoje" class="painel">
+    <div id="cronometro" class="cronometro oculto">
+      <span id="cron-materia"></span>
+      <span id="cron-tempo" class="cron-tempo">00:00</span>
+      <button id="cron-parar" class="btn-pequeno">parar</button>
+    </div>
+    <div id="fila"></div>
+  </section>
+
+  <section id="painel-trilhas" class="painel oculto">
+    <div id="trilhas"></div>
+  </section>
+</main>
+
+<div id="barra" class="barra oculto">
+  <span id="barra-info"></span>
+  <button id="btn-registrar" class="btn-principal">Registrar</button>
+</div>
+
+<!-- folha de registro -->
+<div id="folha" class="folha oculto">
+  <div class="folha-caixa">
+    <div class="folha-topo">
+      <strong>Registrar sessão</strong>
+      <button id="folha-fechar" class="btn-x" aria-label="fechar">&times;</button>
+    </div>
+
+    <label class="campo">
+      <span>Duração (min)</span>
+      <input id="dur" type="number" min="1" max="600" inputmode="numeric">
+    </label>
+
+    <div id="lista-nos" class="lista-nos"></div>
+
+    <div id="campo-metrica" class="campo oculto">
+      <span id="metrica-nome"></span>
+      <input id="metrica-valor" type="number" inputmode="decimal" step="any">
+    </div>
+
+    <label class="campo">
+      <span>Nota (opcional)</span>
+      <input id="nota" type="text" maxlength="200" placeholder="o que travou, o que melhorou…">
+    </label>
+
+    <button id="salvar" class="btn-principal largo">Salvar</button>
+    <p id="erro" class="erro"></p>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

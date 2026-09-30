@@ -70,6 +70,35 @@ seeds/          as três trilhas (110 nós)
 `graph/` e `scheduler/` não tocam em I/O nem em banco. Não é purismo: são os
 dois únicos módulos com lógica de verdade, e assim ficam testáveis sem mock.
 
+## Como usar
+
+```powershell
+.\build.ps1          # compila
+.\build.ps1 -Test    # compila e roda os testes
+.\build.ps1 -Run     # compila e sobe o servidor
+```
+
+Depois, `build\studytrack.exe`:
+
+| Comando | O que faz |
+| --- | --- |
+| `studytrack serve [porta]` | sobe o servidor (padrão 8080) |
+| `studytrack today` | fila do dia no terminal |
+| `studytrack status` | resumo por matéria |
+| `studytrack seed` | reimporta `seeds/*.json` (idempotente) |
+| `studytrack deadline <nó> <AAAA-MM-DD>` | define prazo (`-` remove) |
+| `studytrack state <nó> <estado>` | muda o estado de um nó |
+
+Na primeira execução o banco é semeado sozinho — abrir vazio seria inútil.
+
+**Celular:** o servidor escuta em `0.0.0.0`, então basta acessar
+`http://<ip-desta-máquina>:8080` pelo navegador do telefone na mesma rede. Na
+primeira vez o Windows Firewall vai pedir autorização; sem liberar, só o
+próprio PC enxerga.
+
+**Registrar uma sessão:** toque nos itens da fila, toque em *Registrar*, ajuste
+a duração (já vem preenchida) e salve. Quatro toques.
+
 ## Ambiente de build
 
 Esta máquina tem MSVC 14.29 (VS 2019 Build Tools, compilador 19.29) e Windows
