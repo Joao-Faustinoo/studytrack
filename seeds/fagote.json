@@ -97,7 +97,7 @@
 
     { "id": "fg.rep.vivaldi-rv484", "kind": "project", "state": "learning", "title": "Vivaldi — Concerto em Mi menor, RV 484",
       "est_minutes": 45, "prereqs": ["fg.tec.escalas-menores", "fg.tec.staccato", "fg.est.milde-op24"],
-      "deadline": null,
+      "deadline": "2027-01-15",
       "criterion": "Três movimentos em andamento de concerto, de cor nas passagens expostas, gravados sem edição e aprovados na escuta.",
       "notes": "PEÇA DA AUDIÇÃO DE RETORNO À ESCOLA. Prioridade máxima. Preencher o campo deadline assim que a data for conhecida." },
 

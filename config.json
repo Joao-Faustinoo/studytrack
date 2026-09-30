@@ -22,7 +22,7 @@
   },
 
   "deadline": {
-    "horizon_days": 90,
+    "horizon_days": 120,
     "_nota": "Prazo só começa a empurrar quando entra nesse horizonte; antes disso um projeto com deadline distante não polui a fila."
   },
 
