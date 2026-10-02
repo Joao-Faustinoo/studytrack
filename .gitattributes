@@ -1,0 +1,4 @@
+* text=auto eol=lf
+
+# nao contar codigo de terceiros nas estatisticas de linguagem do GitHub
+third_party/* linguist-vendored

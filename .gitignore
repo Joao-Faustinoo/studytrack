@@ -1,19 +1,25 @@
+# artefatos de build
 build/
 out/
 .vs/
 .vscode/ipch/
-*.db
-*.db-journal
-*.db-wal
-*.db-shm
+CMakeCache.txt
+CMakeFiles/
+compile_commands.json
+
+# binarios e intermediarios
 *.obj
 *.exe
 *.pdb
 *.ilk
-*.lib
 *.exp
-third_party/*
-!third_party/.gitkeep
-CMakeCache.txt
-CMakeFiles/
-compile_commands.json
+
+# banco local (cada maquina tem o seu; o conteudo vem de seeds/)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# third_party/ e VERSIONADO de proposito: as amalgamacoes de SQLite, Catch2,
+# json.hpp e httplib.h vao no repositorio para que um clone compile offline,
+# sem rede e com as versoes exatas congeladas.

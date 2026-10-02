@@ -18,8 +18,13 @@ add_library(st_vendor INTERFACE)    # para codigo de terceiros
 
 if(MSVC)
     # /utf-8 e obrigatorio em todos: os seeds e as mensagens tem acento.
-    target_compile_options(st_strict  INTERFACE /utf-8 /W4 /permissive- /Zc:__cplusplus)
-    target_compile_options(st_relaxed INTERFACE /utf-8 /W4 /Zc:__cplusplus)
+    # /external:templates- e necessario junto do /external:W0: sem ele o MSVC
+    # usa o nivel de advertencia do ponto onde o template e INSTANCIADO (nosso
+    # codigo) em vez de onde ele e DEFINIDO (o header de terceiros).
+    target_compile_options(st_strict  INTERFACE /utf-8 /W4 /permissive- /Zc:__cplusplus
+                                                /external:W0 /external:templates-)
+    target_compile_options(st_relaxed INTERFACE /utf-8 /W4 /Zc:__cplusplus
+                                                /external:W0 /external:templates-)
     target_compile_options(st_vendor  INTERFACE /utf-8 /W0)
 endif()
 
@@ -64,10 +69,22 @@ add_library(st_core STATIC
 
 target_include_directories(st_core PUBLIC
     src
-    third_party
     "${CMAKE_BINARY_DIR}/generated")
 
+# SYSTEM: as advertencias do httplib.h e do json.hpp nao sao problema nosso e
+# nao devem poluir todo build. Com MSVC isso vira /external:I, que so faz
+# efeito junto do /external:W0 definido em st_strict.
+target_include_directories(st_core SYSTEM PUBLIC third_party)
+
 target_link_libraries(st_core PUBLIC sqlite3 PRIVATE st_strict)
+
+# C4127 vem de dentro do httplib.h. O par /external:W0 + /external:templates-
+# acima deveria bastar, mas nao cobre este caso no MSVC 19.29 - testado. Entao
+# a supressao e cirurgica: so este codigo, so esta advertencia. O resto do
+# projeto continua em /W4 sem excecao.
+if(MSVC)
+    set_source_files_properties(src/api/server.cpp PROPERTIES COMPILE_OPTIONS /wd4127)
+endif()
 if(WIN32)
     target_link_libraries(st_core PUBLIC ws2_32)
 endif()
