@@ -1,8 +1,11 @@
+#include <cstring>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <optional>
 #include <sstream>
 #include <string>
+#include <system_error>
 #include <vector>
 
 #include "api/server.h"
@@ -28,6 +31,40 @@ fs::path exe_dir() {
 #endif
 }
 
+std::optional<fs::path> variavel_ambiente(const char* nome) {
+#if defined(_WIN32)
+    // GetEnvironmentVariableW em vez de getenv: o getenv dispara C4996 no MSVC
+    // e o projeto compila em /W4 sem advertencia nenhuma.
+    const std::wstring wnome(nome, nome + std::strlen(nome));
+    const DWORD n = GetEnvironmentVariableW(wnome.c_str(), nullptr, 0);
+    if (n == 0) return std::nullopt;
+    std::wstring buf(n, L'\0');
+    const DWORD m = GetEnvironmentVariableW(wnome.c_str(), buf.data(), n);
+    if (m == 0 || m >= n) return std::nullopt;
+    buf.resize(m);
+    return fs::path(buf);
+#else
+    const char* v = std::getenv(nome);
+    if (!v || !*v) return std::nullopt;
+    return fs::path(v);
+#endif
+}
+
+// O banco mora FORA de build/, de proposito.
+//
+// Ele ja morou em build/studytrack.db, ao lado do executavel, e aquilo era uma
+// armadilha: `build.ps1 -Clean` apaga build/ inteira. Todo o resto ali dentro
+// se regenera em 33 segundos; o banco, nao. Misturar o unico arquivo
+// insubstituivel do projeto com lixo de compilacao so adia o acidente.
+//
+// Padrao: <raiz-do-projeto>/data/studytrack.db, ou seja, a pasta data/ irma do
+// diretorio do executavel. Sobrevive ao -Clean, fica obvio para backup, e o
+// .gitignore ja o cobre por *.db. STUDYTRACK_DB sobrescreve.
+fs::path caminho_banco(const fs::path& dir_exe) {
+    if (const auto v = variavel_ambiente("STUDYTRACK_DB")) return *v;
+    return dir_exe.parent_path() / "data" / "studytrack.db";
+}
+
 std::string read_file(const fs::path& p) {
     std::ifstream f(p, std::ios::binary);
     if (!f) return {};
@@ -50,7 +87,10 @@ void usage() {
         "  studytrack status          resumo por materia\n"
         "  studytrack deadline <no> <AAAA-MM-DD|-->   define ou limpa prazo\n"
         "  studytrack state <no> <estado>             muda o estado de um no\n\n"
-        "estados: locked todo learning consolidated maintenance archived\n";
+        "estados: locked todo learning consolidated maintenance archived\n\n"
+        "O banco fica em data/studytrack.db, FORA de build/, para sobreviver a\n"
+        "um `build.ps1 -Clean`. Defina STUDYTRACK_DB para usar outro caminho.\n"
+        "Backup = copiar a pasta data/. O git nao versiona o banco.\n";
 }
 
 int cmd_seed(st::Store& store, const fs::path& seeds) {
@@ -102,7 +142,7 @@ int main(int argc, char** argv) {
 #endif
 
     const fs::path raiz    = exe_dir();
-    const fs::path db      = raiz / "studytrack.db";
+    const fs::path db      = caminho_banco(raiz);
     const fs::path web     = raiz / "web";
     const fs::path seeds   = raiz / "seeds";
     const fs::path cfgpath = raiz / "config.json";
@@ -115,6 +155,13 @@ int main(int argc, char** argv) {
             usage();
             return 0;
         }
+
+        // a pasta precisa existir antes do sqlite3_open, que nao a cria
+        std::error_code ec;
+        fs::create_directories(db.parent_path(), ec);
+        if (ec)
+            throw std::runtime_error("nao consegui criar " + db.parent_path().string() +
+                                     ": " + ec.message());
 
         st::Store store(db.string());
 

@@ -91,6 +91,18 @@ Depois, `build\studytrack.exe`:
 
 Na primeira execução o banco é semeado sozinho — abrir vazio seria inútil.
 
+### Onde ficam os dados
+
+`data/studytrack.db`, **fora de `build/`**, de propósito: `build.ps1 -Clean` apaga
+`build/` inteira, e tudo ali dentro se regenera em segundos — menos o banco, que é
+o único arquivo insubstituível do projeto. Defina `STUDYTRACK_DB` para usar outro
+caminho.
+
+O banco **não vai para o git** (`*.db` está no `.gitignore`), e isso é deliberado:
+é binário, muda a cada sessão e é seu diário de estudo. Como consequência, **o push
+para o GitHub faz backup do código, não dos dados** — backup do histórico é copiar
+a pasta `data/`.
+
 **Celular:** o servidor escuta em `0.0.0.0`, então basta acessar
 `http://<ip-desta-máquina>:8080` pelo navegador do telefone na mesma rede. Na
 primeira vez o Windows Firewall vai pedir autorização; sem liberar, só o
